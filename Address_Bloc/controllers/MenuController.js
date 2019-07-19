@@ -52,6 +52,14 @@ module.exports = class MenuController {
     process.exit();
   }
 
+  getContactCount(){
+    return this.contacts.length;
+  }
+
+  remindMe(){
+    return "Learning is a life-long pursuit"
+  }
+
   getDate() {
     var d = Date(Date.now());
     var a = d.toString();
