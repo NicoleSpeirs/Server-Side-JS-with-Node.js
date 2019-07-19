@@ -1,52 +1,60 @@
-const inquirer = require('inquirer');
+const inquirer = require("inquirer");
 
 module.exports = class MenuController {
-  constructor(){
+  constructor() {
     this.mainMenuQuestions = [
       {
-       type: "list",
+        type: "list",
         name: "mainMenuChoice",
         message: "Please choose from an option below: ",
-        choices: [
-          "Add new contact",
-          "Exit"
-        ]
+        choices: ["Add new contact", "Get current Date and time", "Exit"]
       }
     ];
     this.contacts = [];
   }
 
-  main(){
+  main() {
     console.log(`Welcome to AddressBloc!`);
-     inquirer.prompt(this.mainMenuQuestions).then((response) => {
-       switch(response.mainMenuChoice){
-         case "Add new contact":
-           this.addContact();
-           break;
-         case "Exit":
-           this.exit();
-         default:
-           console.log("Invalid input");
-           this.main();
-       }
-     })
-     .catch((err) => {
-       console.log(err);
-     });
+    inquirer
+      .prompt(this.mainMenuQuestions)
+      .then(response => {
+        switch (response.mainMenuChoice) {
+          case "Add new contact":
+            this.addContact();
+            break;
+          case "Get current Date and time":
+            this.getDate();
+            break;
+          case "Exit":
+            this.exit();
+          default:
+            console.log("Invalid input");
+            this.main();
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
-  clear(){
+  clear() {
     console.log("\x1Bc");
   }
 
-  addContact(){
+  addContact() {
     this.clear();
-    console.log('addContact called');
+    console.log("addContact called");
     this.main();
   }
 
-  exit(){
+  exit() {
     console.log("Thanks for using AddressBloc!");
     process.exit();
   }
-}
+
+  getDate() {
+    var d = Date(Date.now());
+    var a = d.toString();
+    console.log("The current date is: " + a);
+  }
+};
